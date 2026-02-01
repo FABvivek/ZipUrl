@@ -18,10 +18,10 @@ public class AuthController {
 
     private UserService userService;
 
-//    @PostMapping("/public/login")
-//    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){
-//        return ResponseEntity.ok(userService.authenticateUser(loginRequest));
-//    }
+    @PostMapping("/public/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){
+        return ResponseEntity.ok(userService.authenticateUser(loginRequest));
+    }
 
     @PostMapping("/public/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest){
