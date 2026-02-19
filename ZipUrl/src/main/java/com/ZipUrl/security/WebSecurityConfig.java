@@ -42,12 +42,7 @@ public class WebSecurityConfig {
     }
 
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -59,7 +54,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/{shortUrl}").permitAll()
                         .anyRequest().authenticated()
                 );
-        http.authenticationProvider(authenticationProvider());
+
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
