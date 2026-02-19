@@ -3,6 +3,7 @@ package com.ZipUrl.Controller;
 import com.ZipUrl.DTO.LoginRequest;
 import com.ZipUrl.DTO.RegisterRequest;
 import com.ZipUrl.models.User;
+import com.ZipUrl.security.JwtAuthenticationResponse;
 import com.ZipUrl.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,15 @@ public class AuthController {
 
     private UserService userService;
 
+
     @PostMapping("/public/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){
-        return ResponseEntity.ok(userService.authenticateUser(loginRequest));
+        System.out.println("LOGIN HIT");
+        JwtAuthenticationResponse response = userService.authenticateUser(loginRequest);
+        System.out.println("JWT: " + response);
+        return ResponseEntity.ok(response);
     }
+
 
     @PostMapping("/public/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest){
